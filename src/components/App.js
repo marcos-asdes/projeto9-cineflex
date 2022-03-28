@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SelectMovie from "./SelectMovie.js";
-/* import SelectMovieSession from "./SelectMovieSession.js";
-import SelectSeats from "./SelectSeats.js";
-import RequestCompleted from ".RequestCompleted.js"; */
+import SelectMovieSession from "./SelectMovieSession.js";
+/* import SelectSeats from "./SelectSeats.js"; */
+/* import RequestCompleted from ".RequestCompleted.js"; */
 
 
 export default function App() {
@@ -10,8 +10,8 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<SelectMovie />} />
-{/*                 <Route path="/sessions" element={<SelectMovieSession />} />
- */}{/*                 <Route path="/seats" element={<SelectSeats />} /> */}
+                <Route path="/movie/:movieId" element={<SelectMovieSession />} />
+{/*                 <Route path="/session" element={<SelectSeats />} /> */}
 {/*                 <Route path="/sucess" element={<RequestCompleted />} /> */}
             </Routes>
         </BrowserRouter>
