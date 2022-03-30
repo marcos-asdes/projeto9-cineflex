@@ -3,7 +3,7 @@ import { useState } from "react";
 import SelectMovie from "./SelectMovie.js";
 import SelectMovieSession from "./SelectMovieSession.js";
 import SelectSeats from "./SelectSeats.js";
-import RequestCompleted from ".RequestCompleted.js";
+import RequestCompleted from "./RequestCompleted.js";
 
 
 export default function App() {

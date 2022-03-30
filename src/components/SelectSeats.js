@@ -1,5 +1,5 @@
-import { useState, useEffect, useNavigate } from "react";
-import { useParams, Link } from "react-router-dom"; 
+import { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom"; 
 import axios from "axios";
 import styled from "styled-components";
 
@@ -29,7 +29,8 @@ export default function SelectSeats({completePurchase}) {
         <ThirdScreen>
             <Top />
             <Seats seats={seats} selecteds={selecteds} setSelecteds={setSelecteds}/>
-            <UserInformations seats={seats} navigate={navigate} selecteds={selecteds} dataClient={dataClient} setDataClient={setDataClient}/>
+            <UserInformations completePurchase={completePurchase} info1={info1} info2={info2} info3={info3} 
+            navigate={navigate} selecteds={selecteds} dataClient={dataClient} setDataClient={setDataClient}/>
             <Bottom info1={info1} info2={info2} info3={info3}/>
         </ThirdScreen>
     ) : (<p>Loading...</p>); /* configurar tela de loading */
@@ -113,7 +114,7 @@ function LegendStatus() {
     )
 }
 
-function UserInformations({navigate, seats, selecteds, dataClient, setDataClient}) {
+function UserInformations({completePurchase, navigate, info1, info2, info3, selecteds, dataClient, setDataClient}) {
 
     function confirmPurchase(event) {
         event.preventDefault();
@@ -125,9 +126,9 @@ function UserInformations({navigate, seats, selecteds, dataClient, setDataClient
         })
         promise.then(response => {
             completePurchase({
-                movie: seats.movie.title,
-                day: seats.day.date,
-                showtime: seats.name,
+                movie: info2.title,
+                day: info3.date,
+                showtime: info1.name,
                 seats: selecteds, 
                 client: dataClient
             })
@@ -151,63 +152,6 @@ function UserInformations({navigate, seats, selecteds, dataClient, setDataClient
         </>
     )
 }
-
-const Forms = styled.form`
-    & {
-        width: calc(100vw - 48px);
-        margin: 42px auto 57px auto;
-        display: flex;
-        flex-direction: column;
-        align-self: start;
-    }
-
-    * {
-        margin: 5px 0 0 0;
-    }
-
-    input {
-        width: 100%;
-        height: 51px;
-        padding-left: 18px;
-        font-style: italic;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 21px;
-        display: flex;
-        align-items: center;
-        color: #AFAFAF;
-        background: #FFFFFF;
-        border: 1px solid #D5D5D5;
-        box-sizing: border-box;
-        border-radius: 3px;
-        margin: 7px 0px 15px 0px;
-    }
-
-    button {
-        width: 225px;
-        height: 42px;
-        background: #E8833A;
-        border-radius: 3px;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 21px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        letter-spacing: 0.04em;
-        color: #FFFFFF;
-        justify-content: center;
-        border-style: none;
-        margin-bottom: 117px;
-    }
-
-    div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-`
 
 function Bottom({info1, info2, info3}) {
     return (
@@ -363,6 +307,62 @@ const Legend = styled.div`
         border-radius: 17px;
         background: #FBE192;
         border: 1px solid #F7C52B;
+    }
+`
+const Forms = styled.form`
+    & {
+        width: calc(100vw - 48px);
+        margin: 42px auto 57px auto;
+        display: flex;
+        flex-direction: column;
+        align-self: start;
+    }
+
+    * {
+        margin: 5px 0 0 0;
+    }
+
+    input {
+        width: 100%;
+        height: 51px;
+        padding-left: 18px;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        color: #AFAFAF;
+        background: #FFFFFF;
+        border: 1px solid #D5D5D5;
+        box-sizing: border-box;
+        border-radius: 3px;
+        margin: 7px 0px 15px 0px;
+    }
+
+    button {
+        width: 225px;
+        height: 42px;
+        background: #E8833A;
+        border-radius: 3px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        justify-content: center;
+        border-style: none;
+        margin-bottom: 117px;
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `
 const Footer = styled.div`
